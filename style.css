@@ -1,0 +1,44 @@
+html {
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+}
+
+#control-area {
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  width: 600px;
+  height: 300px;
+  z-index: 1;
+}
+
+#canvas-sample {
+  position: absolute;
+  top: 51px;
+  left: 51px;
+}
+
+#box {
+  position: relative;
+  border: 1px solid blue;
+  width: 60px;
+  height: 30px;
+}
+
+#menu {
+  position: absolute;
+  background-color: white;
+  box-shadow: -2px 2px 4px grey;
+  padding: 8px;
+  max-width: 100px;
+  z-index: 1000;
+  display: none;
+}
+
+#menu span:hover {
+  background: #ecf2fa;
+  cursor: pointer;
+}
