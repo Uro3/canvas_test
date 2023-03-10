@@ -1,0 +1,53 @@
+html {
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+}
+
+#table {
+  position: absolute;
+  top: 50px;
+}
+
+#control-area {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  overflow: auto;
+  z-index: 1;
+}
+
+#box {
+  position: relative;
+  border: 1px solid blue;
+  display: none;
+}
+
+#scroll-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#canvas {
+  position: absolute;
+  top: 1px;
+  left: 1px;
+}
+
+#menu {
+  position: absolute;
+  background-color: white;
+  box-shadow: -2px 2px 4px grey;
+  padding: 8px;
+  max-width: 100px;
+  z-index: 1000;
+  display: none;
+}
+
+#menu span:hover {
+  background: #ecf2fa;
+  cursor: pointer;
+}

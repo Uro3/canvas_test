@@ -1,6 +1,6 @@
 (function () {
-  const MAX_X_CELL_NUM = 300;
-  const MAX_Y_CELL_NUM = 300;
+  const MAX_X_CELL_NUM = 500;
+  const MAX_Y_CELL_NUM = 500;
   const CELL_WIDTH = 90;
   const CELL_HEIGHT = 30;
 
@@ -15,12 +15,6 @@
       this.data = data;
       this.cursorX = 0;
       this.cursorY = 0;
-
-      const offscreenCanvas = document.createElement('canvas');
-      offscreenCanvas.width = maxWidth;
-      offscreenCanvas.height = maxHeight;
-      this.offscreenCanvas = offscreenCanvas;
-      this.isRedered = false;
     }
 
     get offscreenCtx() {
@@ -35,12 +29,16 @@
       return this.cursorY * CELL_HEIGHT;
     }
 
+    get renderingCellNumX() {
+      return canvasWidth / CELL_WIDTH + 1;
+    }
+
+    get renderingCellNumY() {
+      return canvasHeight / CELL_HEIGHT + 1;
+    }
+
     render() {
-      if (!this.isRedered) {
-        this.drawTable();
-        this.isRedered = true;
-      }
-      this.ctx.drawImage(this.offscreenCanvas, 0, 0);
+      this.drawTable();
     }
 
     shiftCell(x, y) {
@@ -54,21 +52,21 @@
     };
 
     drawTable() {
-      for (let i = 0; i <= maxWidth; i += CELL_WIDTH) {
-        this.drawLine(i, 0, i, maxHeight);
+      for (let i = 0; i <= this.renderingCellNumX; i++) {
+        this.drawLine(this.baseX + i * CELL_WIDTH, this.baseY, this.baseX + i * CELL_WIDTH, this.baseY + canvasHeight);
       }
-      for (let i = 0; i <= maxHeight; i += CELL_HEIGHT) {
-        this.drawLine(0, i, maxWidth, i);
+      for (let i = 0; i <= this.renderingCellNumY; i++) {
+        this.drawLine(this.baseX, this.baseY + i * CELL_HEIGHT, this.baseX + canvasWidth, this.baseY + i * CELL_HEIGHT);
       }
-      for (let i = 0; i < this.data.length; i++) {
-        for (let j = 0; j < this.data[i].length; j++) {
+      for (let i = this.cursorY; i < this.cursorY + this.renderingCellNumY && i < this.data.length; i++) {
+        for (let j = this.cursorX; j < this.cursorX + this.renderingCellNumX && j < this.data[i].length; j++) {
           this.drawText(this.data[i][j], j * CELL_WIDTH, i * CELL_HEIGHT);
         }
       }
     }
 
     drawLine(s_x, s_y, d_x, d_y) {
-      const ctx = this.offscreenCtx;
+      const { ctx } = this;
       ctx.strokeStyle = 'rgba(0, 0, 0, 0.3)';
       ctx.beginPath();
       ctx.moveTo(s_x, s_y);
@@ -78,7 +76,7 @@
     };
 
     drawText(text, x, y) {
-      const ctx = this.offscreenCtx;
+      const { ctx } = this;
       ctx.fillStyle = 'rgb(0, 0, 0)';
       ctx.font = '12px serif';
       ctx.textBaseline = "top";

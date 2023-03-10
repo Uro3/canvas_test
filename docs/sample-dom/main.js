@@ -1,6 +1,6 @@
 (function () {
-  const MAX_X_CELL_NUM = 300;
-  const MAX_Y_CELL_NUM = 300;
+  const MAX_X_CELL_NUM = 500;
+  const MAX_Y_CELL_NUM = 500;
   const CELL_WIDTH = 90;
   const CELL_HEIGHT = 30;
 
