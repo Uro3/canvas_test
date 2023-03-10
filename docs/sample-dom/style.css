@@ -1,0 +1,47 @@
+html {
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+}
+
+#table-wrapper {
+  position: absolute;
+  top: 50px;
+  overflow-x: scroll;
+}
+
+table {
+  table-layout: fixed;
+}
+
+table,
+td {
+  border-collapse: collapse;
+  border: 1px solid #999;
+}
+
+td {
+  font-size: 12px;
+  cursor: pointer;
+}
+
+td.selected {
+  border: 2px solid blue;
+}
+
+#menu {
+  position: absolute;
+  background-color: white;
+  box-shadow: -2px 2px 4px grey;
+  padding: 8px;
+  max-width: 100px;
+  z-index: 1000;
+  display: none;
+}
+
+#menu span:hover {
+  background: #ecf2fa;
+  cursor: pointer;
+}
